@@ -2,10 +2,10 @@
   "$schema": "https://turborepo.dev/schema.json",
   "dangerouslyDisablePackageManagerCheck": true,
   "cacheDir": ".turbo/cache",
-  "globalDependencies": [".env.production"],
+  "globalDependencies": [".env"],
   "tasks": {
     "build": {
-      "inputs": ["$TURBO_DEFAULT$", ".env.production"],
+      "inputs": ["$TURBO_DEFAULT$", ".env*"],
       "dependsOn": ["^build"],
       "outputs": [".next/**", "!.next/cache/**"]
     },

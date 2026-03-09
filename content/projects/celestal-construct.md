@@ -1,6 +1,6 @@
 ---
 title: "Celestal Construct"
-description: "A Minecraft modpack focused on building and exploration"
+description: "The Otherworld Adventure Modpack"
 category:
   - "minecraft"
 order: 1

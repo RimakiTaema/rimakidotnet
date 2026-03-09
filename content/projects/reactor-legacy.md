@@ -1,6 +1,6 @@
 ---
 title: "Reactor Legacy"
-description: "A Minecraft modpack with reactor mechanics and automation"
+description: "The Legacy of Reactor from all inspired roblox reactor games"
 category:
   - "minecraft"
 order: 2

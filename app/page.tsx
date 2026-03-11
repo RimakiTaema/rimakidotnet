@@ -19,7 +19,7 @@ export default function Home() {
         {title: "Placeholder 5", description: "Placeholder 5"},
     ]
   return (
-    <div className="min-h-screen bg-zinc-50 font-sans dark:bg-black p-6">
+    <div className="min-h-screen bg-zinc-50 font-sans dark:bg-black p-8">
       <div className="text-2xl font-semibold">
         Projects
       </div>

@@ -4,6 +4,7 @@ import "./globals.css";
 import { cn } from "@/lib/utils";
 import { TooltipProvider } from "@/components/ui/tooltip"
 import React from "react";
+import SiteHeader from "@/components/siteHeader";
 
 const jetbrainsMono = JetBrains_Mono({subsets:['latin'],variable:'--font-mono'});
 
@@ -29,11 +30,15 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en" className={cn("font-mono", jetbrainsMono.variable)}>
-      <body
+    <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
-      >
-        <TooltipProvider>{children}</TooltipProvider>
-      </body>
+    >
+        <SiteHeader>
+            <TooltipProvider>
+                {children}
+            </TooltipProvider>
+        </SiteHeader>
+    </body>
     </html>
   );
 }

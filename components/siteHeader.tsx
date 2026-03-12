@@ -4,7 +4,7 @@ import Navbar from "@/components/navbar";
 export default function SiteHeader({ children }: { children?: React.ReactNode }) {
     return (
         <>
-            <header className="w-full border-b">
+            <header className="sticky top-0 z-30 w-full border-b bg-white dark:bg-black">
                 <div className="flex h-14 items-center px-4">
                     <Navbar />
                 </div>

@@ -1,16 +1,20 @@
 "use client"
 
+import { useState } from "react";
 import {
   AlertDialog,
   AlertDialogContent,
   AlertDialogHeader,
   AlertDialogTitle,
   AlertDialogDescription,
+  AlertDialogFooter,
+  AlertDialogAction,
 } from "@/components/ui/alert-dialog";
 import {SidebarSeparator} from "@/components/ui/sidebar";
 import {Card, CardDescription, CardTitle} from "@/components/ui/card";
 
 export default function Home() {
+    const [alertOpen, setAlertOpen] = useState(true);
     const card = [
         {title: "Placeholder 1", description: "Placeholder 1"},
         {title: "Placeholder 2", description: "Placeholder 2"},
@@ -19,7 +23,7 @@ export default function Home() {
         {title: "Placeholder 5", description: "Placeholder 5"},
     ]
 
-    const cagtcard = [
+    const categoryCards = [
         {title: "Placeholder 1", description: "Placeholder 1"},
         {title: "Placeholder 2", description: "Placeholder 2"},
         {title: "Placeholder 3", description: "Placeholder 3"},
@@ -46,12 +50,12 @@ export default function Home() {
             </div>
       </div>
         <div className="text-2xl font-semibold">
-            Categorises
+            Categories
         </div>
         <SidebarSeparator />
         <div className="mt-4">
             <div className="flex flex-row gap-3 overflow-x-auto">
-                {cagtcard.map((card, index) => (
+                {categoryCards.map((card, index) => (
                     <Card key={index} className="w-64 h-64 shrink-0">
                         <CardTitle className="text-2xl font-semibold text-gray-900 px-2">
                             {card.title}
@@ -63,7 +67,7 @@ export default function Home() {
                 ))}
             </div>
         </div>
-      <AlertDialog open>
+      <AlertDialog open={alertOpen} onOpenChange={setAlertOpen}>
         <AlertDialogContent>
           <AlertDialogHeader>
             <AlertDialogTitle>Website Under Rewrite...</AlertDialogTitle>
@@ -71,6 +75,11 @@ export default function Home() {
               Sorry In Advance I&#39;m On Rewriting Website to Better Theme (Style Is ExaTon NEXT)
             </AlertDialogDescription>
           </AlertDialogHeader>
+          <AlertDialogFooter>
+            <AlertDialogAction>
+              Acknowledge
+            </AlertDialogAction>
+          </AlertDialogFooter>
         </AlertDialogContent>
       </AlertDialog>
     </div>

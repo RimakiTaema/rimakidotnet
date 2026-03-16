@@ -15,6 +15,9 @@ export default function Navbar() {
     const toggleMobileMenu = () => {
         setIsMobileMenuOpen(!isMobileMenuOpen);
     };
+    function statusPage() {
+        window.open("https://status.rimaki.net/status/rimakibackend", "_blank")
+    }
 
     return (
         <nav className="flex w-full items-center justify-between text-slate-800">
@@ -98,7 +101,7 @@ export default function Navbar() {
                                 </li>
                             ))}
                             <li>
-                                <Button className="w-full rounded-md h-8">
+                                <Button onClick={statusPage} className="w-full rounded-md h-8">
                                     Status
                                 </Button>
                             </li>
@@ -116,7 +119,7 @@ export default function Navbar() {
                                 </li>
                             ))}
                             <li>
-                                <Button className="w-full rounded-md h-8">
+                                <Button onClick={statusPage} className="rounded-md h-8 cursor-pointer">
                                     Status
                                 </Button>
                             </li>

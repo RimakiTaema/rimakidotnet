@@ -1,6 +1,6 @@
 "use client"
 
-import {useEffect, useRef, useState} from "react";
+import { useEffect, useRef, useState } from "react";
 import {
     AlertDialog,
     AlertDialogAction,
@@ -10,19 +10,27 @@ import {
     AlertDialogHeader,
     AlertDialogTitle,
 } from "@/components/ui/alert-dialog";
-import {SidebarSeparator} from "@/components/ui/sidebar";
-import {Card, CardDescription, CardTitle} from "@/components/ui/card";
-import {categoryCards} from "@/app/categoryCards";
-import {card} from "@/app/card";
+import { SidebarSeparator } from "@/components/ui/sidebar";
+import type { Project, Category } from "@/db";
+import ProjectCard from "@/components/project-card";
+import CategoryCard from "@/components/category-card";
 import gsap from "gsap";
 
 export default function Home() {
     const [alertOpen, setAlertOpen] = useState(true);
+    const [projects, setProjects] = useState<Project[]>([]);
+    const [categories, setCategories] = useState<Category[]>([]);
     const cardRef1 = useRef<HTMLDivElement>(null);
     const cardRef2 = useRef<HTMLDivElement>(null);
     const pageRef = useRef<HTMLDivElement>(null);
 
     useEffect(() => {
+        fetch("/api/projects").then((r) => r.json() as Promise<Project[]>).then(setProjects);
+        fetch("/api/categories").then((r) => r.json() as Promise<Category[]>).then(setCategories);
+    }, []);
+
+    useEffect(() => {
+        if (projects.length === 0 && categories.length === 0) return;
         const ctx = gsap.context(() => {
             gsap.from(cardRef1.current, {
                 y: 20,
@@ -48,62 +56,47 @@ export default function Home() {
             });
         });
         return () => ctx.revert();
-    }, []);
+    }, [projects, categories]);
 
-
-  return (
-    <div ref={pageRef} className="min-h-screen bg-zinc-50 font-sans dark:bg-black p-8">
-      <div className="text-2xl font-semibold">
-        Projects
-      </div>
-      <SidebarSeparator />
-      <div ref={cardRef1} className="mt-4">
-            <div className="flex flex-row gap-3 overflow-x-auto">
-                {card.map((card, index) => (
-                    <Card key={index} className="w-64 h-64 shrink-0">
-                        <CardTitle className="text-2xl font-semibold text-gray-900 px-2">
-                            {card.title}
-                        </CardTitle>
-                        <CardDescription className="text-lg text-gray-900 px-2">
-                            {card.description}
-                        </CardDescription>
-                    </Card>
-                ))}
+    return (
+        <div ref={pageRef} className="min-h-screen bg-zinc-50 font-sans dark:bg-black p-8">
+            <div className="text-2xl font-semibold">
+                Projects
             </div>
-      </div>
-        <div className="text-2xl font-semibold">
-            Categories
-        </div>
-        <SidebarSeparator />
-        <div ref={cardRef2} className="mt-4">
-            <div className="flex flex-row gap-3 overflow-x-auto">
-                {categoryCards.map((card, index) => (
-                    <Card key={index} className="w-64 h-64 shrink-0">
-                        <CardTitle className="text-2xl font-semibold text-gray-900 px-2">
-                            {card.title}
-                        </CardTitle>
-                        <CardDescription className="text-lg text-gray-900 px-2">
-                            {card.description}
-                        </CardDescription>
-                    </Card>
-                ))}
+            <SidebarSeparator />
+            <div ref={cardRef1} className="mt-4">
+                <div className="flex flex-row gap-3 overflow-x-auto">
+                    {projects.map((project) => (
+                        <ProjectCard key={project.id} {...project} />
+                    ))}
+                </div>
             </div>
+            <div className="text-2xl font-semibold">
+                Categories
+            </div>
+            <SidebarSeparator />
+            <div ref={cardRef2} className="mt-4">
+                <div className="flex flex-row gap-3 overflow-x-auto">
+                    {categories.map((category) => (
+                        <CategoryCard key={category.id} {...category} />
+                    ))}
+                </div>
+            </div>
+            <AlertDialog open={alertOpen} onOpenChange={setAlertOpen}>
+                <AlertDialogContent>
+                    <AlertDialogHeader>
+                        <AlertDialogTitle>Website Under Rewrite...</AlertDialogTitle>
+                        <AlertDialogDescription>
+                            Sorry In Advance I&#39;m On Rewriting Website to Better Theme
+                        </AlertDialogDescription>
+                    </AlertDialogHeader>
+                    <AlertDialogFooter>
+                        <AlertDialogAction>
+                            Acknowledge
+                        </AlertDialogAction>
+                    </AlertDialogFooter>
+                </AlertDialogContent>
+            </AlertDialog>
         </div>
-      <AlertDialog open={alertOpen} onOpenChange={setAlertOpen}>
-        <AlertDialogContent>
-          <AlertDialogHeader>
-            <AlertDialogTitle>Website Under Rewrite...</AlertDialogTitle>
-            <AlertDialogDescription>
-              Sorry In Advance I&#39;m On Rewriting Website to Better Theme
-            </AlertDialogDescription>
-          </AlertDialogHeader>
-          <AlertDialogFooter>
-            <AlertDialogAction>
-              Acknowledge
-            </AlertDialogAction>
-          </AlertDialogFooter>
-        </AlertDialogContent>
-      </AlertDialog>
-    </div>
-  );
+    );
 }

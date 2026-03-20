@@ -1,5 +1,6 @@
 import React from "react";
 import Navbar from "@/components/navbar";
+import Footer from "@/components/footer";
 
 export default function SiteHeader({ children }: { children?: React.ReactNode }) {
     return (
@@ -10,6 +11,7 @@ export default function SiteHeader({ children }: { children?: React.ReactNode })
                 </div>
             </header>
             {children}
+            <Footer />
         </>
     )
 }

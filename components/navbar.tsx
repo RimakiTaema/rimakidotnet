@@ -3,12 +3,7 @@
 import Link from "next/link";
 import { useState } from "react";
 import { Button } from "./ui/button";
-
-export const navItems = [
-    { name: "Home", href: "/"},
-    { name: "Projects", href: "/categories"},
-    { name: "About", href: "/about"},
-];
+import { navItems } from "@/lib/navigation";
 
 export default function Navbar() {
     const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);

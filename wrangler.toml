@@ -1,9 +1,0 @@
-name = "rimakidotnet"
-compatibility_date = "2024-09-23"
-compatibility_flags = ["nodejs_compat"]
-pages_build_output_dir = ".vercel/output/static"
-
-[[d1_databases]]
-binding = "DB"
-database_name = "rimaki-projects"
-database_id = "fca47cd1-4932-49ff-903a-eaf0d11aa5c0"
